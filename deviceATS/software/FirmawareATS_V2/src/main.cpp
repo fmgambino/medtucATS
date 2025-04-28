@@ -2,6 +2,9 @@
 #include <WiFiClientSecure.h>
 #include <UniversalTelegramBot.h>
 #include <WiFiManager.h>
+#include <WebServer.h>
+#include <SPIFFS.h>
+#include <ESPmDNS.h>
 
 // Configuración Telegram
 #define BOT_TOKEN "7788186330:AAGoWXnz6N1r3EfzZHbD9nSuwC5rxXAMQhc"
@@ -9,37 +12,60 @@
 
 WiFiClientSecure secured_client;
 UniversalTelegramBot bot(BOT_TOKEN, secured_client);
+WebServer server(80);
 
 // Intervalos
-const long sendDataInterval = 3600000; // Intervalo para enviar datos cada hora (3,600,000 milisegundos)
-const long checkTelegramInterval = 5000; // Intervalo para revisar comandos
+const long sendDataInterval = 3600000; // Enviar datos cada hora
+const long checkTelegramInterval = 5000; // Revisar comandos Telegram
 unsigned long previousSendMillis = 0;
 unsigned long previousTelegramMillis = 0;
 
-// Funciones que declaramos
+// Funciones
 void sendSensorData();
 void checkTelegramCommands();
+void setupServer();
 
 void setup() {
   Serial.begin(115200);
 
+  // WiFiManager para autoconexión
   WiFiManager wm;
   if (!wm.autoConnect("ATS_AP_WiFi", "12345678")) {
     Serial.println("Fallo al conectar, reiniciando ESP32...");
     delay(3000);
     ESP.restart();
   }
-  
+
   Serial.println("WiFi conectado exitosamente!");
   Serial.println(WiFi.localIP());
 
+  // Inicializar SPIFFS
+  if (!SPIFFS.begin(true)) {
+    Serial.println("❌ Error montando SPIFFS");
+    return;
+  }
+  Serial.println("✅ SPIFFS montado correctamente");
+
+  // Inicializar mDNS
+  if (!MDNS.begin("ats")) {
+    Serial.println("❌ Error configurando mDNS");
+  } else {
+    Serial.println("✅ mDNS iniciado, accede a: http://ats.local");
+  }
+
+  // Configurar HTTPS para Telegram
   secured_client.setCACert(TELEGRAM_CERTIFICATE_ROOT);
 
   randomSeed(esp_random());
 
-  // ⛔ Limpiar todos los mensajes viejos apenas conecta
+  // Limpiar mensajes antiguos de Telegram
   Serial.println("Limpiando mensajes pendientes...");
-  bot.getUpdates(0);  // <<< AQUI se descartan mensajes anteriores
+  bot.getUpdates(0);
+
+  // Iniciar servidor web
+  setupServer();
+  server.begin();
+  Serial.println("✅ Servidor HTTP iniciado");
 }
 
 void loop() {
@@ -48,27 +74,27 @@ void loop() {
   // Revisar comandos Telegram
   if (currentMillis - previousTelegramMillis >= checkTelegramInterval) {
     previousTelegramMillis = currentMillis;
-    checkTelegramCommands(); // Revisar si hay comandos nuevos
+    checkTelegramCommands();
   }
 
-  // Enviar datos periódicamente si no se recibe un comando "DataSensores"
+  // Enviar datos periódicamente
   if (currentMillis - previousSendMillis >= sendDataInterval) {
     previousSendMillis = currentMillis;
-    sendSensorData(); // Enviar datos cada hora
+    sendSensorData();
   }
 
-  delay(100);
+  server.handleClient(); // Atender peticiones HTTP
+
+  delay(10);
 }
 
 void sendSensorData() {
-  // Datos simulados
-  float temperatura = random(200, 400) / 10.0; // Entre 20.0°C y 40.0°C
-  float humedad = random(300, 900) / 10.0;      // Entre 30.0% y 90.0%
-  int calidadAire = random(100, 500);           // Simular valor del MQ135
-  float nafta = random(0, 100) / 10.0;          // Simular nivel de combustible
-  bool generadorEncendido = random(0, 2);       // 0 o 1
+  float temperatura = random(200, 400) / 10.0;
+  float humedad = random(300, 900) / 10.0;
+  int calidadAire = random(100, 500);
+  float nafta = random(0, 100) / 10.0;
+  bool generadorEncendido = random(0, 2);
 
-  // Componer mensaje
   String estadoGenerador = generadorEncendido ? "Encendido" : "Apagado";
   String message = "📡 *Datos Sistema ATS MEDTUC (Simulados)*:\n";
   message += "🌡️ Temperatura: " + String(temperatura, 1) + " °C\n";
@@ -84,7 +110,7 @@ void sendSensorData() {
   message += "\n\n👨‍💻 Dev. for: Ing. Gambino";
 
   bool sent = bot.sendMessage(CHANNEL_CHAT_ID, message, "Markdown");
-  
+
   if (sent) {
     Serial.println("✅ Mensaje enviado correctamente al canal de Telegram.");
   } else {
@@ -123,7 +149,6 @@ void checkTelegramCommands() {
         menu += "🛰️ `/DataSensores` - Obtener datos actuales de los sensores.\n";
         menu += "♻️ `/APreset` - Borrar configuración WiFi y reiniciar.\n";
         menu += "🏁 `/start` - Mostrar este menú.\n";
-
         bot.sendMessage(chat_id, menu, "Markdown");
       }
       else {
@@ -131,10 +156,100 @@ void checkTelegramCommands() {
       }
     }
 
-    // 🔥 IMPORTANTE: Actualizar last_message_received al último mensaje recibido
     bot.last_message_received = bot.messages[numNewMessages-1].update_id;
-
-    // Buscar nuevos mensajes después de procesar
     numNewMessages = bot.getUpdates(bot.last_message_received + 1);
   }
+}
+
+void setupServer() {
+  // Página principal
+  server.on("/", HTTP_GET, []() {
+    File file = SPIFFS.open("/index.html", "r");
+    if (!file) {
+      server.send(500, "text/plain", "Error abriendo index.html");
+      return;
+    }
+    server.streamFile(file, "text/html");
+    file.close();
+  });
+
+  // Página de login
+  server.on("/login", HTTP_GET, []() {
+    File file = SPIFFS.open("/login.html", "r");
+    if (!file) {
+      server.send(500, "text/plain", "Error abriendo login.html");
+      return;
+    }
+    server.streamFile(file, "text/html");
+    file.close();
+  });
+
+  // Archivos CSS
+  server.on("/styless.css", HTTP_GET, []() {
+    File file = SPIFFS.open("/styles.css", "r");
+    if (!file) {
+      server.send(404, "text/plain", "No encontrado styles.css");
+      return;
+    }
+    server.streamFile(file, "text/css");
+    file.close();
+  });
+
+  // Archivos JS
+  server.on("/script.js", HTTP_GET, []() {
+    File file = SPIFFS.open("/script.js", "r");
+    if (!file) {
+      server.send(404, "text/plain", "No encontrado script.js");
+      return;
+    }
+    server.streamFile(file, "application/javascript");
+    file.close();
+  });
+
+  // Logo para modo claro
+  server.on("/logo_light.png", HTTP_GET, []() {
+    File file = SPIFFS.open("/logo_light.png", "r");
+    if (!file) {
+      server.send(404, "text/plain", "No encontrado logo_light.png");
+      return;
+    }
+    server.streamFile(file, "image/png");
+    file.close();
+  });
+
+  // Logo para modo oscuro
+  server.on("/logo_dark.png", HTTP_GET, []() {
+    File file = SPIFFS.open("/logo_dark.png", "r");
+    if (!file) {
+      server.send(404, "text/plain", "No encontrado logo_dark.png");
+      return;
+    }
+    server.streamFile(file, "image/png");
+    file.close();
+  });
+
+  // ⚡ API para obtener datos en tiempo real
+  server.on("/data", HTTP_GET, []() {
+    // Simulamos datos como en tu función sendSensorData()
+    float temperatura = random(200, 400) / 10.0;
+    float humedad = random(300, 900) / 10.0;
+    int calidadAire = random(100, 500);
+    float nafta = random(0, 100) / 10.0;
+    bool generadorEncendido = random(0, 2);
+
+    String json = "{";
+    json += "\"temperatura\":" + String(temperatura, 1) + ",";
+    json += "\"humedad\":" + String(humedad, 1) + ",";
+    json += "\"calidadAire\":" + String(calidadAire) + ",";
+    json += "\"nafta\":" + String(nafta, 1) + ",";
+    json += "\"generador\":" + String(generadorEncendido ? "true" : "false");
+    json += "}";
+
+    server.send(200, "application/json", json);
+  });
+
+  // 404 Not Found
+  server.onNotFound([]() {
+    server.send(404, "text/plain", "Página no encontrada");
+  });
 }
