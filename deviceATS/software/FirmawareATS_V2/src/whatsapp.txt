@@ -1,0 +1,118 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+#include <WiFiManager.h> // Para gestionar WiFi
+
+// Configura tu número de WhatsApp y tu APIKey de CallMeBot
+String phoneNumber = "5493816150488";  // Número en formato internacional
+String apiKey = "6667865";             // APIKey de CallMeBot
+
+const long interval = 10000;
+unsigned long previousMillis = 0;
+
+// ---> DECLARACIONES DE FUNCIONES
+void sendMessageWhatsApp(String message);
+String urlencode(String str);    // <<==== AGREGA ESTO TAMBIÉN
+
+
+void setup() {
+  Serial.begin(115200);
+
+  WiFiManager wm;
+  if (!wm.autoConnect("ATS_AP", "12345678")) {
+    Serial.println("Fallo WiFi -> reiniciando");
+    delay(3000);
+    ESP.restart();
+  }
+  
+  Serial.println("WiFi Conectado!");
+  Serial.println(WiFi.localIP());
+
+  randomSeed(analogRead(0));
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+  if (currentMillis - previousMillis >= interval) {
+    previousMillis = currentMillis;
+
+    // Datos de prueba
+    float temperatura = random(200, 400) / 10.0;
+    float humedad = random(300, 900) / 10.0;
+    int calidadAire = random(100, 500);
+    bool generadorEncendido = random(0, 2);
+
+    String estadoGenerador = generadorEncendido ? "Encendido" : "Apagado";
+
+    // Componer el mensaje
+    String message = "Datos Sistema ATS MEDTUC (Simulados):\n";
+    message += "Temperatura: " + String(temperatura, 1) + " °C\n";
+    message += "Humedad: " + String(humedad, 1) + " %\n";
+    message += "Calidad del Aire: " + String(calidadAire) + " ppm\n";
+    message += "Generador: " + estadoGenerador + "\n";
+    message += "Dev. for: Ing. Gambino";
+
+    sendMessageWhatsApp(message);
+
+    Serial.println("Mensaje enviado a WhatsApp:");
+    Serial.println(message);
+  }
+
+  delay(100);
+}
+
+// ----> FUNCIÓN PARA ENVIAR WhatsApp
+void sendMessageWhatsApp(String message) {
+  if (WiFi.status() == WL_CONNECTED) {
+    HTTPClient http;
+
+    // CORREGIR: codificar el texto
+    String encodedMessage = urlencode(message);
+
+    String url = "https://api.callmebot.com/whatsapp.php?groupid=LmDM4jGf51PEk6eqiPg5U1&text=" + phoneNumber + "&text=" + encodedMessage + "&apikey=" + apiKey;
+    http.begin(url);
+
+    int httpCode = http.GET();
+    if (httpCode > 0) {
+      Serial.printf("Código de respuesta HTTP: %d\n", httpCode);
+      String payload = http.getString();
+      Serial.println(payload);
+    } else {
+      Serial.printf("Error en envío: %s\n", http.errorToString(httpCode).c_str());
+    }
+    http.end();
+  } else {
+    Serial.println("WiFi no conectado");
+  }
+}
+
+// ----> FUNCIÓN urlencode
+String urlencode(String str) {
+  String encodedString = "";
+  char c;
+  char code0;
+  char code1;
+  char code2;
+  for (int i = 0; i < str.length(); i++) {
+    c = str.charAt(i);
+    if (c == ' ') {
+      encodedString += "%20";
+    } else if (isalnum(c)) {
+      encodedString += c;
+    } else {
+      code1 = (c & 0xf) + '0';
+      if ((c & 0xf) > 9) {
+        code1 = (c & 0xf) - 10 + 'A';
+      }
+      code0 = ((c >> 4) & 0xf) + '0';
+      if (((c >> 4) & 0xf) > 9) {
+        code0 = ((c >> 4) & 0xf) - 10 + 'A';
+      }
+      code2 = '\0';
+      encodedString += '%';
+      encodedString += code0;
+      encodedString += code1;
+    }
+    yield();  // Para evitar watchdog en loops largos
+  }
+  return encodedString;
+}
