@@ -17,20 +17,32 @@ async function fetchData() {
 setInterval(fetchData, 2000);
 fetchData();
 
-// Modo oscuro/claro
+// Modo oscuro/claro con LocalStorage
 const toggleButton = document.getElementById('theme-toggle');
 const logo = document.getElementById('logo');
 
-toggleButton.addEventListener('click', () => {
-  const currentTheme = document.documentElement.getAttribute('data-theme');
-
-  if (currentTheme === 'dark') {
-    document.documentElement.removeAttribute('data-theme');
-    toggleButton.textContent = '🌙';
-    logo.src = 'https://www.educaciontuc.gov.ar/wp-content/uploads/2024/10/mnisteriodeeducacion_bco.webp';
-  } else {
+// Función para actualizar visualmente el tema
+function updateTheme(theme) {
+  if (theme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
     toggleButton.textContent = '☀️';
     logo.src = 'https://www.educaciontuc.gov.ar/wp-content/uploads/2024/10/MINISTERIO-DE-EDUCACION_Mesa-de-trabajo-1-2.png';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    toggleButton.textContent = '🌙';
+    logo.src = 'https://www.educaciontuc.gov.ar/wp-content/uploads/2024/10/mnisteriodeeducacion_bco.webp';
   }
+}
+
+// Leer el tema guardado al cargar la página
+const savedTheme = localStorage.getItem('theme') || 'light';
+updateTheme(savedTheme);
+
+// Escuchar click en el botón
+toggleButton.addEventListener('click', () => {
+  const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  updateTheme(newTheme);
+  localStorage.setItem('theme', newTheme); // Guardar en localStorage
 });

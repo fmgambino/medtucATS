@@ -185,7 +185,7 @@ void setupServer() {
   });
 
   // Archivos CSS
-  server.on("/styless.css", HTTP_GET, []() {
+  server.on("/styles.css", HTTP_GET, []() {
     File file = SPIFFS.open("/styles.css", "r");
     if (!file) {
       server.send(404, "text/plain", "No encontrado styles.css");

@@ -41,15 +41,19 @@ void loop() {
     int calidadAire = random(100, 500);
     bool generadorEncendido = random(0, 2);
 
-    String estadoGenerador = generadorEncendido ? "Encendido" : "Apagado";
+     String estadoGenerador = generadorEncendido ? "Encendido" : "Apagado";
+  String message = "📡 *Datos Sistema ATS MEDTUC (Simulados)*:\n";
+  message += "🌡️ Temperatura: " + String(temperatura, 1) + " °C\n";
+  message += "💧 Humedad: " + String(humedad, 1) + " %\n";
+  message += "🫧 Calidad del Aire: " + String(calidadAire) + " ppm\n";
+  message += "⚡ Generador: " + estadoGenerador + "\n";
+  message += "⛽ Nivel Nafta: " + String(nafta, 1) + " %\n";
 
-    // Componer el mensaje
-    String message = "Datos Sistema ATS MEDTUC (Simulados):\n";
-    message += "Temperatura: " + String(temperatura, 1) + " °C\n";
-    message += "Humedad: " + String(humedad, 1) + " %\n";
-    message += "Calidad del Aire: " + String(calidadAire) + " ppm\n";
-    message += "Generador: " + estadoGenerador + "\n";
-    message += "Dev. for: Ing. Gambino";
+  if (nafta <= 30) {
+    message += "\n🚨 *ALERTA:* NIVEL BAJO DE COMBUSTIBLE!";
+  }
+
+  message += "\n\n👨‍💻 Dev. for: Ing. Gambino";
 
     sendMessageWhatsApp(message);
 
