@@ -20,7 +20,16 @@ unsigned long previousTelegramMillis = 0;
 
 unsigned int rebootCount = 0;
 String lastBootTime = "";
+esp_reset_reason_t reason = esp_reset_reason();
+  
+String razon;
+String ultimaRazon;
 
+//Datos Device ATS
+String tablero = "No definido";
+String ubicacion = "No definida";
+
+//FUNCIONES
 void sendSensorData();
 void checkTelegramCommands();
 void setupServer();
@@ -29,6 +38,9 @@ void saveIntervalToFile(unsigned long savedValue, unsigned long currentValue);
 void saveRebootInfo(); // Guardados de Reinicios ESP32
 void loadRebootInfo(); // Cargar Info Reinicios ESP32
 void waitForTimeSync(); // Funcion de espera NTP
+void loadDeviceInfo(); // Funcion Info. Device ATS ESP32
+void saveDeviceInfo(); // Guardar en SPIFFS datos Device ATS ESP32
+
 
 void setup() {
   Serial.begin(115200);
@@ -50,10 +62,28 @@ void setup() {
   Serial.println("✅ SPIFFS montado correctamente");
 
   loadIntervalFromFile(); // cargar intervalo desde archivo
+  loadDeviceInfo(); // <-- Llamar funcion Info Device ATS
+
 
   configTime(-3 * 3600, 0, "pool.ntp.org", "time.nist.gov"); // zona horaria Argentina
   waitForTimeSync();  // <-- Agregar esto después de configTime
   delay(1000); // esperar un poco para sincronización
+
+ // DATOS REINICIOS ESP32 
+
+switch (reason) {
+  case ESP_RST_POWERON:   razon = "Corte de energía (Power-On)"; break;
+  case ESP_RST_EXT:       razon = "Reset externo (botón o pin)"; break;
+  case ESP_RST_SW:        razon = "Reinicio por software"; break;
+  case ESP_RST_PANIC:     razon = "Falla/pánico del sistema"; break;
+  case ESP_RST_INT_WDT:   razon = "Watchdog de interrupción"; break;
+  case ESP_RST_TASK_WDT:  razon = "Watchdog de tarea"; break;
+  case ESP_RST_BROWNOUT:  razon = "Bajo voltaje (Brownout)"; break;
+  default:                razon = "Motivo desconocido"; break;
+}
+
+ultimaRazon = razon; // Asignás a una variable global
+
   loadRebootInfo(); // leer y actualizar reinicios
 
   if (!MDNS.begin("ats")) {
@@ -68,6 +98,13 @@ void setup() {
   setupServer();
   server.begin();
   Serial.println("✅ Servidor HTTP iniciado");
+
+  String msg = "♻️ *ESP32 reiniciada*\n";
+  msg += "🕒 Fecha/Hora: `" + lastBootTime + "`\n";
+  msg += "📋 Motivo: `" + ultimaRazon + "`\n";
+  msg += "🔁 Conteo: *" + String(rebootCount) + "* reinicio(s)";
+  bot.sendMessage(CHANNEL_CHAT_ID, msg, "Markdown");
+
 }
 
 void loop() {
@@ -197,22 +234,76 @@ void checkTelegramCommands() {
           msg += "⌛ Esperando servidor de fecha y hora...\n";
         } else {
           msg += "🕒 Último reinicio: `" + lastBootTime + "`\n";
+          msg += "📋 Motivo: `" + ultimaRazon + "`\n";
         }
       
         bot.sendMessage(chat_id, msg, "Markdown");
-      }        
+      }  
       
-      else if (text == "/start") {
+      else if (text == "/reset") {
+        bot.sendMessage(chat_id, "♻️ Reiniciando ESP32...", "");
+        delay(1000); // tiempo para enviar el mensaje antes de reiniciar
+        ESP.restart();
+      }
+      
+      else if (text == "/deviceATS") {
+        String mac = WiFi.macAddress();
+        String macShort = mac.substring(mac.length() - 5);
+        macShort.replace(":", "");
+        String serie = "ATS" + macShort;
+      
+        String msg = "📟 *Información del Dispositivo:*\n\n";
+        msg += "🔢 Nº Serie: `" + serie + "`\n";
+        msg += "📡 MAC: `" + mac + "`\n";
+        msg += "📶 WiFi: `" + WiFi.SSID() + "`\n";
+        msg += "🌐 IP Conectada: `" + WiFi.localIP().toString() + "`\n";
+        msg += "📳 IP AP: `" + WiFi.softAPIP().toString() + "`\n";
+        msg += "📋 Tablero Eléctrico Nº: `" + tablero + "`\n";
+        msg += "📍 Ubicación: `" + ubicacion + "`\n\n";
+        msg += "✏️ Para modificar:\n";
+        msg += "`/setTablero 3`\n";
+        msg += "`/setUbicacion Sala Principal`";
+      
+        bot.sendMessage(chat_id, msg, "Markdown");
+      }
+      
+      else if (text.startsWith("/setTablero ")) {
+        String param = text.substring(12);
+        param.trim();
+        if (param.length() > 0) {
+          tablero = param;
+          saveDeviceInfo();
+          bot.sendMessage(chat_id, "✅ Tablero actualizado a: *" + tablero + "*", "Markdown");
+        } else {
+          bot.sendMessage(chat_id, "❌ Debes ingresar un número de tablero. Ej: `/setTablero 3`", "Markdown");
+        }
+      }
+      
+      else if (text.startsWith("/setUbicacion ")) {
+        String param = text.substring(14);
+        param.trim();
+        if (param.length() > 0) {
+          ubicacion = param;
+          saveDeviceInfo();
+          bot.sendMessage(chat_id, "✅ Ubicación actualizada a: *" + ubicacion + "*", "Markdown");
+        } else {
+          bot.sendMessage(chat_id, "❌ Debes ingresar una ubicación. Ej: `/setUbicacion Sala Principal`", "Markdown");
+        }
+      }      
+      
+      else if (text == "/menu") {
         String menu = "📋 *Comandos disponibles:*\n\n";
         menu += "🛰️ `/DataSensores` - Obtener datos actuales\n";
         menu += "♻️ `/APreset` - Borrar configuración WiFi y reiniciar\n";
         menu += "⏱️ `/setInterval [segundos]` - Cambiar intervalo automático\n";
         menu += "ℹ️ `/status` - Ver estado general del sistema\n";
-        menu += "🏁 `/start` - Mostrar este menú\n";
+        menu += "🔄 `/reset` - Reiniciar manualmente la ESP32\n";
+        menu += "📟 `/deviceATS` - Información del dispositivo\n";
+        menu += "🏁 `/menu` - Mostrar este menú\n";
         bot.sendMessage(chat_id, menu, "Markdown");
       } 
       else {
-        bot.sendMessage(chat_id, "❓ Comando no reconocido. Usa `/start`.", "Markdown");
+        bot.sendMessage(chat_id, "❓ Comando no reconocido. Usa `/menu`.", "Markdown");
       }
     }
 
@@ -415,4 +506,31 @@ void waitForTimeSync() {
   } else {
     Serial.println("✅ Hora sincronizada.");
   }
+}
+
+//FUNCION DEVICES ATS ESP32
+void loadDeviceInfo() {
+  File file = SPIFFS.open("/device.txt", "r");
+  if (!file) {
+    Serial.println("⚠️ No se encontró device.txt, usando valores por defecto.");
+    return;
+  }
+
+  tablero = file.readStringUntil('\n');
+  ubicacion = file.readStringUntil('\n');
+  tablero.trim();
+  ubicacion.trim();
+  file.close();
+}
+
+void saveDeviceInfo() {
+  File file = SPIFFS.open("/device.txt", "w");
+  if (!file) {
+    Serial.println("❌ Error escribiendo device.txt");
+    return;
+  }
+
+  file.println(tablero);
+  file.println(ubicacion);
+  file.close();
 }
