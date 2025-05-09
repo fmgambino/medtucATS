@@ -5,8 +5,9 @@
 #include <WebServer.h>
 #include <SPIFFS.h>
 #include <ESPmDNS.h>
+#include <Preferences.h> // Libreria acceso Memoria No Volatil ESP32
 
-#define BOT_TOKEN "7788186330:AAGoWXnz6N1r3EfzZHbD9nSuwC5rxXAMQhc"
+#define BOT_TOKEN "7838830397:AAGKjyAn-HEDmZpn43bVjVo48O2Zo_0wOfY"
 #define CHANNEL_CHAT_ID "-1002244708158"
 
 WiFiClientSecure secured_client;
@@ -14,6 +15,7 @@ UniversalTelegramBot bot(BOT_TOKEN, secured_client);
 WebServer server(80);
 
 unsigned long sendDataInterval = 3600000; // valor por defecto: 1 hora
+unsigned long lastSendTime = 0;
 const unsigned long checkTelegramInterval = 5000;
 unsigned long previousSendMillis = 0;
 unsigned long previousTelegramMillis = 0;
@@ -40,10 +42,30 @@ void loadRebootInfo(); // Cargar Info Reinicios ESP32
 void waitForTimeSync(); // Funcion de espera NTP
 void loadDeviceInfo(); // Funcion Info. Device ATS ESP32
 void saveDeviceInfo(); // Guardar en SPIFFS datos Device ATS ESP32
+void saveRemainingTime(unsigned long remainingTime);  // Declaración de la función Guardado Conteo
+void loadRemainingTime();
 
+unsigned long remainingTime = 0;
 
 void setup() {
   Serial.begin(115200);
+  Preferences preferences;
+  preferences.begin("timer", true);  // Solo lectura
+  remainingTime = preferences.getUInt("remainingTime", 0);  // Obtener el tiempo restante
+  preferences.end();
+  
+  if (remainingTime > 0) {
+    // Si hay tiempo restante, reinicia el conteo desde ese valor
+    sendDataInterval = remainingTime * 1000;  // Convertimos el tiempo restante en milisegundos
+    Serial.println("Tiempo restante recuperado: " + String(remainingTime) + " segundos");
+  } else {
+    // Si no hay valor almacenado, asigna un valor por defecto
+    sendDataInterval = 3600000; // 1 hora
+    Serial.println("No se encontró tiempo restante, usando valor por defecto.");
+  }
+  
+  loadIntervalFromFile();  // Cargar intervalo desde el archivo
+  loadRemainingTime();
 
   WiFiManager wm;
   if (!wm.autoConnect("ATS_AP_WiFi", "12345678")) {
@@ -147,8 +169,12 @@ void sendSensorData() {
 
   bool sent = bot.sendMessage(CHANNEL_CHAT_ID, message, "Markdown");
 
-  if (sent) Serial.println("✅ Mensaje enviado correctamente.");
-  else Serial.println("❌ Error enviando mensaje.");
+  if (sent) {
+    Serial.println("✅ Mensaje enviado correctamente.");
+    lastSendTime = millis();  // <-- Vuelve a tomar elvalor en segundos restantes
+  } else {
+    Serial.println("❌ Error enviando mensaje.");
+  }
 }
 
 void checkTelegramCommands() {
@@ -175,6 +201,10 @@ void checkTelegramCommands() {
       else if (text.startsWith("/setInterval ")) {
         String param = text.substring(13);
         param.trim();
+        
+        // Guardar el tiempo restante antes de actualizar el intervalo
+        unsigned long remaining = (sendDataInterval > 0) ? (sendDataInterval - (millis() - lastSendTime)) / 1000 : 0;
+        saveRemainingTime(remaining);
       
         if (param == "off") {
           saveIntervalToFile(sendDataInterval, 0); // guardar el último y poner en 0
@@ -211,7 +241,7 @@ void checkTelegramCommands() {
             bot.sendMessage(chat_id, "❌ Valor inválido. Usa un número entre 60 y 86400, o 'off/on'.", "");
           }
         }
-      }
+      }      
       
       else if (text == "/getInterval") {
         if (sendDataInterval == 0) {
@@ -222,10 +252,18 @@ void checkTelegramCommands() {
       }
 
       else if (text == "/status") {
+        unsigned long timeNow = millis();
+        unsigned long elapsed = timeNow - lastSendTime;
+        unsigned long remaining = (sendDataInterval > 0 && elapsed < sendDataInterval)
+                                  ? (sendDataInterval - elapsed) / 1000
+                                  : 0;
+
+
         String msg = "ℹ️ *Estado del sistema:*\n\n";
         msg += (sendDataInterval == 0)
                  ? "⏸️ Envío automático: *Deshabilitado*\n"
                  : "▶️ Envío automático cada *" + String(sendDataInterval / 1000) + "* seg\n";
+        msg += "⏱️ Nuevos de Datos en: " + String(remaining) + " segundos\n";
         msg += "♻️ Reinicios desde la última vez: *" + String(rebootCount) + "*\n";
       
         time_t now = time(nullptr);
@@ -241,31 +279,45 @@ void checkTelegramCommands() {
       }  
       
       else if (text == "/reset") {
-        bot.sendMessage(chat_id, "♻️ Reiniciando ESP32...", "");
-        delay(1000); // tiempo para enviar el mensaje antes de reiniciar
-        ESP.restart();
+        unsigned long now = millis();
+        unsigned long elapsed = now - lastSendTime;
+        unsigned long remaining = (sendDataInterval > 0 && elapsed < sendDataInterval)
+                                ? (sendDataInterval - elapsed)
+                               : 0;
+        File file = SPIFFS.open("/remainingTime.txt", "w");
+        if (file) {
+        file.println(remaining);
+        file.close();
       }
+      
+        bot.sendMessage(chat_id, "♻️ Reiniciando ESP32...", "");
+        delay(1000);
+        ESP.restart();
+      }      
       
       else if (text == "/deviceATS") {
-        String mac = WiFi.macAddress();
-        String macShort = mac.substring(mac.length() - 5);
-        macShort.replace(":", "");
-        String serie = "ATS" + macShort;
-      
-        String msg = "📟 *Información del Dispositivo:*\n\n";
-        msg += "🔢 Nº Serie: `" + serie + "`\n";
-        msg += "📡 MAC: `" + mac + "`\n";
-        msg += "📶 WiFi: `" + WiFi.SSID() + "`\n";
-        msg += "🌐 IP Conectada: `" + WiFi.localIP().toString() + "`\n";
-        msg += "📳 IP AP: `" + WiFi.softAPIP().toString() + "`\n";
-        msg += "📋 Tablero Eléctrico Nº: `" + tablero + "`\n";
-        msg += "📍 Ubicación: `" + ubicacion + "`\n\n";
-        msg += "✏️ Para modificar:\n";
-        msg += "`/setTablero 3`\n";
-        msg += "`/setUbicacion Sala Principal`";
-      
-        bot.sendMessage(chat_id, msg, "Markdown");
-      }
+  String mac = WiFi.macAddress();
+  String macShort = mac.substring(mac.length() - 5);
+  macShort.replace(":", "");
+  String serie = "ATS" + macShort;
+
+  String msg = "📟 *Información del Dispositivo:*\n\n";
+  msg += "🔢 Nº Serie: `" + serie + "`\n";
+  msg += "📡 MAC: `" + mac + "`\n";
+  msg += "📶 WiFi: `" + WiFi.SSID() + "`\n";
+  msg += "🌐 IP Conectada: `" + WiFi.localIP().toString() + "`\n";
+  msg += "📳 IP AP: `" + WiFi.softAPIP().toString() + "`\n";
+  msg += "🔗 URL: http://ats.local\n";
+ // msg += "🧭 GPS: `" + gpsUrl + "`\n";
+  msg += "📋 Tablero Eléctrico Nº: `" + tablero + "`\n";
+  msg += "📍 Ubicación: `" + ubicacion + "`\n\n";
+  msg += "✏️ Para modificar:\n";
+  msg += "`/setTablero 3`\n";
+  msg += "`/setUbicacion Sala Principal`\n";
+  //msg += "`/setGPS https://maps.google.com/...`";
+
+  bot.sendMessage(chat_id, msg, "Markdown");
+}
       
       else if (text.startsWith("/setTablero ")) {
         String param = text.substring(12);
@@ -353,6 +405,10 @@ void saveIntervalToFile(unsigned long savedValue, unsigned long currentValue) {
   file.println(String(savedValue) + "|" + String(currentValue));
   file.close();
   Serial.println("💾 Intervalo guardado. Actual: " + String(currentValue / 1000));
+  
+  // También se guarda el tiempo restante
+  unsigned long remaining = (currentValue > 0) ? (currentValue - (millis() - lastSendTime)) / 1000 : 0;
+  saveRemainingTime(remaining);
 }
 
 // El resto de setupServer() queda igual sin cambios
@@ -534,3 +590,33 @@ void saveDeviceInfo() {
   file.println(ubicacion);
   file.close();
 }
+
+void saveRemainingTime(unsigned long remaining) {
+  Preferences preferences;
+  preferences.begin("timer", false);  // Inicia el namespace 'timer'
+  preferences.putUInt("remainingTime", remaining);  // Guarda el tiempo restante
+  preferences.end();  // Cierra la sesión
+}
+
+void loadRemainingTime() {
+  File file = SPIFFS.open("/remainingTime.txt", "r");
+  if (!file) {
+    Serial.println("⚠️ No se encontró remainingTime.txt");
+    lastSendTime = millis();  // sin ajuste, comienza desde cero
+    return;
+  }
+
+  String line = file.readStringUntil('\n');
+  file.close();
+  unsigned long savedRemaining = line.toInt();
+
+  if (savedRemaining > 0 && savedRemaining < sendDataInterval) {
+    lastSendTime = millis() - (sendDataInterval - savedRemaining);
+    Serial.println("✅ Tiempo restante restaurado: " + String(savedRemaining / 1000) + " seg");
+  } else {
+    lastSendTime = millis(); // inicia normalmente si no hay valor válido
+    Serial.println("⚠️ Tiempo restante no válido. Se usará el valor por defecto.");
+  }
+}
+
+
