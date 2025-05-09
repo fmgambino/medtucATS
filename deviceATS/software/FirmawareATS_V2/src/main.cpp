@@ -67,8 +67,16 @@ void setup() {
   loadIntervalFromFile();  // Cargar intervalo desde el archivo
   loadRemainingTime();
 
+  // Obtener la dirección MAC
+  uint8_t mac[6];
+  esp_read_mac(mac, ESP_MAC_WIFI_STA);  // Puedes usar ESP_MAC_WIFI_SOFTAP si es para el AP directamente
+
+  // Extraer los últimos 4 dígitos (2 bytes) y construir el nombre del AP
+  char apName[32];
+  sprintf(apName, "ATS_AP_WiFi_%02X%02X", mac[4], mac[5]);
+
   WiFiManager wm;
-  if (!wm.autoConnect("ATS_AP_WiFi", "12345678")) {
+  if (!wm.autoConnect(apName, "12345678")) {
     Serial.println("Fallo al conectar, reiniciando ESP32...");
     delay(3000);
     ESP.restart();
