@@ -19,9 +19,9 @@
   <WINDOW type="default" module="PROJNOTES"/>
   <WINDOW type="VIEW3D" module="VIEW3D">
    <camera>
-    <position x="5000000" y="3645000" z="9679789"/>
-    <focus x="5000000" y="3645000" z="0"/>
-    <up x="0" y="1000000" z="0"/>
+    <position x="3696201" y="1141547" z="9264963"/>
+    <focus x="4903734" y="3236972" z="-107854"/>
+    <up x="14823" y="975394" z="219972"/>
    </camera>
   </WINDOW>
  </FRAME>

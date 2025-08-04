@@ -1,0 +1,324 @@
+;Proteus Design Interchange Format
+
+(PDIF
+  (vendor "Labcenter Electronics")
+  (version 1 0)
+  (library
+    (part "SAT3M2132072TR"
+      (family "CON")
+      (package "AMPHENOL_SAT3M2132072TR")
+      (description "Sata,Storage_and_server_connector,1.27mm_pitch,Right_angle,surface_mount,1.5A_current,Tape_and_Reel.")
+      (attribute "PKG_TYPE" "AMPHENOL_SAT3M2132072TR")
+      (attribute "MF" "AMPHENOL_ICC_/_FCI")
+      (attribute "MAXIMUM_PACKAGE_HEIGHT" "5.85_mm")
+      (attribute "PACKAGE" "None")
+      (attribute "PRICE" "None")
+      (attribute "CHECK_PRICES" "https://www.snapeda.com/parts/SAT3M2132072TR/Amphenol/view-part/?ref=eda")
+      (attribute "STANDARD" "Manufacturer_Recommendations")
+      (attribute "PARTREV" "1")
+      (attribute "SNAPEDA_LINK" "https://www.snapeda.com/parts/SAT3M2132072TR/Amphenol/view-part/?ref=snap")
+      (attribute "MP" "SAT3M2132072TR")
+      (attribute "AVAILABILITY" "In_Stock")
+      (attribute "MANUFACTURER" "Amphenol")
+      (gate
+        (swap 1)
+        (symbol "SAT3M2132072TR")
+        (pin "S1" 1 (type PS))
+        (pin "S2" 2 (type PS))
+        (pin "S3" 3 (type PS))
+        (pin "S4" 4 (type PS))
+        (pin "S5" 5 (type PS))
+        (pin "S6" 6 (type PS))
+        (pin "S7" 7 (type PS))
+        (pin "SHIELD" SH1 (type PS))
+        (pin "SHIELD__1" SH2 (type PS))
+      )
+    )
+    (symbol "SAT3M2132072TR"
+      (units THOU)
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 450.0) (pt -150.0 500.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 450.0) (pt -200.0 400.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 400.0) (pt -200.0 -450.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 -450.0) (pt -150.0 -500.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -150.0 -500.0) (pt 200.0 -500.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt 200.0 -500.0) (pt 200.0 500.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt 200.0 500.0) (pt -150.0 500.0))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 400.0) (pt -125.0 400.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 412.5) (pt -112.5 412.5) (pt -112.5 387.5) (pt -175 387.5) (pt -175 412.5) (closed))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 300.0) (pt -125.0 300.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 312.5) (pt -112.5 312.5) (pt -112.5 287.5) (pt -175 287.5) (pt -175 312.5) (closed))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 200.0) (pt -125.0 200.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 212.5) (pt -112.5 212.5) (pt -112.5 187.5) (pt -175 187.5) (pt -175 212.5) (closed))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 100.0) (pt -125.0 100.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 112.5) (pt -112.5 112.5) (pt -112.5 87.5) (pt -175 87.5) (pt -175 112.5) (closed))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 0.0) (pt -125.0 0.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 12.5) (pt -112.5 12.5) (pt -112.5 -12.5) (pt -175 -12.5) (pt -175 12.5) (closed))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 -100.0) (pt -125.0 -100.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 -87.5) (pt -112.5 -87.5) (pt -112.5 -112.5) (pt -175 -112.5) (pt -175 -87.5) (closed))
+      )
+      (graphic
+        (stroke 10.0)
+        (path (pt -200.0 -200.0) (pt -125.0 -200.0))
+      )
+      (graphic
+        (stroke 1)
+        (path (pt -175 -187.5) (pt -112.5 -187.5) (pt -112.5 -212.5) (pt -175 -212.5) (pt -175 -187.5) (closed))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 400.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 300.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 200.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 100.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 0.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 -100.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 -200.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 -400.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+      (terminal
+        (body (symbol "PIN_R0_U_L200") (pt -400.0 -500.0) (rot 0) (mir 0) (visible true))
+        (name (pt 239.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+        (number (pt -39.37 0.0) (rot 0) (just MIDDLE LEFT) (visible true))
+      )
+    )
+    (symbol "PIN_R0_U_L200"
+      (units THOU)
+      (graphic
+        (stroke 6.5)
+        (path (pt 0.0 0.0) (pt 200.0 0.0))
+      )
+    )
+    (package "AMPHENOL_SAT3M2132072TR"
+      (units THOU)
+      (layer TSLK
+        (graphic
+          (stroke 7.87)
+          (circle (pt 165.75 159.84) (pt 173.62 159.84))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -345.28 124.41) (pt -160.63 124.41))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 200.0 124.41) (pt 345.28 124.41))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 345.28 124.41) (pt 345.28 -118.11))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -345.28 -118.11) (pt -345.28 124.41))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 345.28 -118.11) (pt -345.28 -118.11))
+        )
+      )
+      (layer TASM
+        (graphic
+          (stroke 5.0)
+          (path (pt -345.28 124.41) (pt 345.28 124.41))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 345.28 124.41) (pt 345.28 -118.11))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 345.28 -118.11) (pt 345.28 -330.71))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -345.28 -330.71) (pt -345.28 -118.11))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -345.28 -118.11) (pt -345.28 124.41))
+        )
+        (graphic
+          (stroke 7.87)
+          (circle (pt 165.75 159.84) (pt 173.62 159.84))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 345.28 -330.71) (pt -345.28 -330.71))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 345.28 -118.11) (pt -345.28 -118.11))
+        )
+      )
+      (layer OCCA
+        (graphic
+          (stroke 1.97)
+          (path (pt -355.12 142.13) (pt -355.12 -340.55))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -355.12 -340.55) (pt 355.12 -340.55))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 355.12 -340.55) (pt 355.12 142.13))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 355.12 142.13) (pt -355.12 142.13))
+        )
+      )
+      (leg 1 (pt 169.69 92.91) (padstack 1))
+      (leg 2 (pt 119.69 92.91) (padstack 2))
+      (leg 3 (pt 69.69 92.91) (padstack 3))
+      (leg 4 (pt 19.69 92.91) (padstack 4))
+      (leg 5 (pt -30.31 92.91) (padstack 5))
+      (leg 6 (pt -80.31 92.91) (padstack 6))
+      (leg 7 (pt -130.31 92.91) (padstack 7))
+      (leg SH1 (pt -231.1 0) (padstack 8))
+      (leg SH2 (pt 270.47 0) (padstack 9))
+      (padstack 1
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 2
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 3
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 4
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 5
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 6
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 7
+        (pad (layer TCOP) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TRES) (rectf 35.43 78.74 0 0.0 90.0))
+        (pad (layer TPST) (rectf 35.43 78.74 0 0.0 90.0))
+      )
+      (padstack 8
+        (hole 61)
+        (plated true)
+        (pad (layer TCOP) (round 91.54))
+        (pad (layer INNER) (round 91.54))
+        (pad (layer BCOP) (round 91.54))
+        (pad (layer TRES) (round 95.47))
+        (pad (layer BRES) (round 95.47))
+      )
+      (padstack 9
+        (hole 61)
+        (plated true)
+        (pad (layer TCOP) (round 91.54))
+        (pad (layer INNER) (round 91.54))
+        (pad (layer BCOP) (round 91.54))
+        (pad (layer TRES) (round 95.47))
+        (pad (layer BRES) (round 95.47))
+      )
+      (model SAT3M2132072TR.step
+        (euler 0 0 0)
+        (offset 0 0 0)
+      )
+    )
+  )
+)
