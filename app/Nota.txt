@@ -1,0 +1,32 @@
+conexion ok - mauro.z
+
+
+Definiciones propuestas:
+
+ENTRADAS:
+
+3 Sensores Capacitivos / puede ser digital o analogico, brinda una señal de salida que varia entre 0 y vcc segun la distaancia, se alimenta con 6 a 12 volt, tiene que usar una fuente a 12
+
+1 Sensor Óptico Reflectivo / DIGITAL , trabaja con 5 volt , se utiliza directamente del regulador 7805
+
+1 Sensor de temperatura / 
+
+SALIDAS
+
+1 Electroválvula Líquido antiderrame
+
+CRITERIOS PARA EL DISEÑO
+
+– Diseño del Hardware debe ser con SOC ESP32 WROOM soldado a PCB y que se programble desde la misma.
+
+– 2 Entradas Conversoras de 4-20mA a 0-3.3V.
+
+– Respetar Definiciones de Entradas Propuestas.
+
+– Conversor CH340 C/G con Jumper.
+
+– Fuente a Placa.
+
+– Todos los componentes arriba.
+
+– Adaptar a este GABINETE (50X15X25MM)

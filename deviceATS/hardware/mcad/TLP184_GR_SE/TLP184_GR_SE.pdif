@@ -1,0 +1,138 @@
+;Proteus Design Interchange Format
+
+(PDIF
+  (vendor "Labcenter Electronics")
+  (version 1 0)
+  (library
+    (part "SOIC254P700X2304N"
+      (family "ANA")
+      (package "SOIC254P700X2304N")
+      (attribute "PKG_TYPE" "SOIC254P700X2304N")
+    )
+    (package "SOIC254P700X2304N"
+      (units THOU)
+      (layer TSLK
+        (graphic
+          (stroke 5.0)
+          (path (pt 90.55 73.82) (pt 90.55 -73.82))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 90.55 -73.82) (pt -90.55 -73.82))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -90.55 -73.82) (pt -90.55 73.82))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -90.55 73.82) (pt 90.55 73.82))
+        )
+        (graphic
+          (stroke 7.87)
+          (circle (pt -181.1 49.21) (pt -173.23 49.21))
+        )
+      )
+      (layer TASM
+        (graphic
+          (stroke 5.0)
+          (path (pt 90.55 73.82) (pt 90.55 -73.82))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt 90.55 -73.82) (pt -90.55 -73.82))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -90.55 -73.82) (pt -90.55 73.82))
+        )
+        (graphic
+          (stroke 5.0)
+          (path (pt -90.55 73.82) (pt 90.55 73.82))
+        )
+        (graphic
+          (stroke 7.87)
+          (circle (pt -151.57 49.21) (pt -143.7 49.21))
+        )
+      )
+      (layer OCCA
+        (graphic
+          (stroke 1.97)
+          (path (pt 167.32 68.9) (pt 167.32 -68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 167.32 -68.9) (pt 98.43 -68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 98.43 -68.9) (pt 98.43 -83.66))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 98.43 -83.66) (pt -98.43 -83.66))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -98.43 -83.66) (pt -98.43 -68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -98.43 -68.9) (pt -167.32 -68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -167.32 -68.9) (pt -167.32 68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -167.32 68.9) (pt -98.43 68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -98.43 68.9) (pt -98.43 83.66))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt -98.43 83.66) (pt 98.43 83.66))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 98.43 83.66) (pt 98.43 68.9))
+        )
+        (graphic
+          (stroke 1.97)
+          (path (pt 98.43 68.9) (pt 167.32 68.9))
+        )
+      )
+      (leg 1 (pt -127.95 50) (padstack 1))
+      (leg 3 (pt -127.95 -50) (padstack 2))
+      (leg 4 (pt 127.95 -50) (padstack 3))
+      (leg 6 (pt 127.95 50) (padstack 4))
+      (padstack 1
+        (pad (layer TCOP) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TRES) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TPST) (rectf 22.44 63.39 0 1.57 0))
+      )
+      (padstack 2
+        (pad (layer TCOP) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TRES) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TPST) (rectf 22.44 63.39 0 1.57 0))
+      )
+      (padstack 3
+        (pad (layer TCOP) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TRES) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TPST) (rectf 22.44 63.39 0 1.57 0))
+      )
+      (padstack 4
+        (pad (layer TCOP) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TRES) (rectf 22.44 63.39 0 1.57 0))
+        (pad (layer TPST) (rectf 22.44 63.39 0 1.57 0))
+      )
+      (model TLP184_GR_SE.step
+        (euler 0 0 0)
+        (offset 0 0 0)
+      )
+    )
+  )
+)

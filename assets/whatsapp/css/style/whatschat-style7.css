@@ -1,0 +1,185 @@
+/*======================================================
+
+Project: WhatsChat - WhatsApp Chat Widget jQuery Plugin
+Author: Black Theme
+Released On: 10, Aug 2019
+@version: 1.0
+
+========================================================*/
+
+/* WhatsChat Main Panel */
+.wc-style7{
+	font-family: 'Open Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* WhatsChat Floating Button */
+.wc-style7 .wc-button{
+	position: fixed;
+	width: 50px;
+	height: 50px;
+	bottom: 20px;
+	right: 20px;
+	border: 1px solid #fff;
+	border-radius: 50px;
+	text-align: center;
+	box-shadow: 0 0 10px rgba(12, 12, 12, 0.3);	
+	cursor: pointer;
+}
+.wc-style7 .wc-button:hover{
+	box-shadow: 0px 0px 10px rgba(12, 12, 12, 0.5);
+}
+.wc-style7 .wc-button i{
+	margin-top: 13px;
+	font-size: 25px;
+}
+
+/* The popup chat - hidden by default */
+.wc-style7 .wc-panel{
+  	display: none;
+  	position: fixed;
+  	width: 300px;
+  	bottom: 85px;
+	right: 30px;
+	border-radius: 10px;
+  	box-shadow: 0 3px 6px #b4b4b4;
+  	z-index: 9;
+}
+
+/* WhatsChat Header */
+.wc-style7 .wc-panel .wc-header{
+	display: flex;
+	padding: 15px 20px;
+	text-align: center;
+	border-radius: 7px 7px 0 0;
+}
+.wc-style7 .wc-header .wc-img-cont{
+    position: relative;
+    padding: 3px;
+    margin-bottom: 4px;
+    height: 52px;
+    width: 52px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+	overflow: hidden;
+    transition: transform 200ms ease-in-out;
+}
+.wc-style7 .wc-img-cont .wc-user-img{
+    display: block;
+    margin: 0 auto;
+	max-width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.wc-style7 .wc-header .wc-user-info{
+	margin-left: 15px;
+    text-align: left;
+}
+.wc-style7 .wc-user-info strong{
+	font-size: 15px;
+	line-height: 20px;
+}
+.wc-style7 .wc-user-info p{
+	margin-bottom: 0;
+	font-size: 12px;
+	line-height: 20px;
+}
+
+/* WhatsChat Body */
+.wc-style7 .wc-body{
+  	display: flex;
+  	flex-direction: column;
+    position: relative;
+  	padding: 16px 20px 20px 10px;
+  	background-color: rgb(230, 221, 212);
+}
+.wc-style7 .wc-body::before{
+	content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0.08;
+    z-index: 0;
+    background-image: url(http://porquesoycreativo.com/Demos/Chat_Button/img/whatsapp.png); 
+}
+
+/* CSS Chat Bubble */
+.wc-style7 .wc-content .wc-bubble{
+	display: inline-block;
+  	position: relative;
+	padding: 7px 14px 6px;
+    margin-top: 5px;
+    margin-left: 15px;
+	width: 200px;
+	height: auto;
+	border-radius: 0 8px 8px 8px;
+    transition: 0.3s ease all;
+}
+.wc-style7 .wc-content .tri-right.border.left-top:before{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  	left: -40px;
+	right: auto;
+  	top: -8px;
+	bottom: auto;
+	border: 32px solid;
+	border-color: #666 transparent transparent transparent;
+}
+.wc-style7 .wc-content .tri-right.left-top:after{
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+  	left: -20px;
+	right: auto;
+  	top: 0px;
+	bottom: auto;
+	border: 22px solid;
+	border-color: #fff transparent transparent transparent;
+}
+.wc-style7 .wc-content .wc-bubble span{
+	font-size: 13px;
+    font-weight: 700;
+    line-height: 18px;
+}
+.wc-style7 .wc-content .wc-bubble p{
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+/* WhatsChat Footer */
+.wc-style7 .wc-footer{
+    margin: 20px
+    border-radius: 18px;
+}
+.wc-style7 .wc-footer .wc-list{
+    display: flex;
+    position: relative;
+    padding: 8px 0;
+    margin: 20px 20px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    line-height: 20px;
+    border: none;
+    border-radius: 18px;
+    cursor: pointer;
+    overflow: hidden;    
+}
+.wc-style7 .wc-list p{
+	margin-bottom: 0;
+	margin-left: 8px;
+    margin-right: 8px;
+	font-size: 15px;
+}
+.wc-style7 .wc-list i{	`
+	font-size: 20px;
+}

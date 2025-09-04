@@ -1,0 +1,11 @@
+
+
+.weather .mdl-card__supporting-text .weather-level {
+    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+    font-style: none;
+    line-height: 1;
+    color: rgba(255, 255, 255, 0.9);
+    text-shadow: -5px 5px #080808;
+}

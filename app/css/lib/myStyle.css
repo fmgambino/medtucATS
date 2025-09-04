@@ -1,0 +1,181 @@
+.booked-prime-days-data .booked-wzs-pd-val {
+    color: #ffffff !important;
+}
+
+main{
+    padding: 20px;
+    padding-bottom: 40px;
+}
+.hc-sidebar {
+    background: #08240d !important;    
+}
+.hc-sidebar img{
+    width: 90%;
+    height: auto;
+
+}
+.hc-sidebar-header{
+    background: linear-gradient(to top right, #67d56f , #42a448 ) !important;    
+}
+.hc-text-white{
+    color: white !important;    
+}
+.hc-text-white :hover{
+    border-left: 2px solid #2DE14F ;
+}
+´.hc-text-negro{
+    color: black !important;
+}
+
+.mdl-layout__drawer-button{
+    color:black !important;
+}
+
+.mdl-navigation__link--current{
+    color:#2DE14F !important;
+    border-left:2px solid #2DE14F !important;
+}
+
+main {
+    background: #f0eeef !important;
+}
+
+.mdl-layout__header{
+    background-color: #2DE14F !important;
+}
+.mdl-card__title{
+    background: none !important;     
+}
+
+.mdl-card__supporting-text{    
+    width: 100% !important;    
+    text-align: right;
+    padding: 0 !important;
+    background: none!important;
+    text-align: center;
+}
+.mdl-card{
+    border-radius: 20%;
+    background: none!important;     
+}
+.hc-color-celeste{
+    background: linear-gradient(to top right, #9af4fd , #00bcd2 )!important;
+    border-radius: 5%;
+    margin-top: 20px;
+    
+    /*box-shadow: 1px 1px 1px 1px #0d97a7;*/
+}
+.hc-color-naranja{
+    background: linear-gradient(to top right, #fac883 , #ff9500 ) !important;
+    border-radius: 5%;  
+    margin-top: 20px;  
+    /*box-shadow: 2px 2px 2px 2px #fac883;*/
+}
+
+.hc-color-verde{
+    background: linear-gradient(to top right, #67d56f , #42a448 ) !important;
+    border-radius: 5%;    
+    margin-top: 20px;
+    /*box-shadow: 2px 2px 2px 2px #67d56f;*/
+}
+.hc-color-rojo{
+    background: linear-gradient(to top right, #c07674 , #ca3c37 ) !important;
+    border-radius: 5%;
+    /*box-shadow: 2px 2px 2px 2px #c07674;*/
+    height: 100%;
+    
+}
+.hc-box-a{
+    display: flow-root;
+    margin-top: 20px;
+}
+.hc-box-b{
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-top: 20px;
+}
+
+.mdl-shadow--2dp{
+    box-shadow: none !important;
+}
+
+.col-12 .col-md-4 {
+    padding-left: 0px !important;
+}
+
+.hc-color-text-naranja{
+    color: #ff9500 ;
+}
+
+.hc-color-text-celeste{
+    color: #00bcd2 ;
+}
+
+.hc-color-text-blanco {
+    color: #ffffff !important;
+}
+.weather-temperature{
+    text-align: center;
+}
+.weather-description{
+    text-align: center;
+}
+.weather-description::before{
+    content: none !important;
+}
+
+.booked-prime-days-data .booked-wzs-pd-val{
+    color: #ffffff !important;
+}
+.booked-prime-days-data .booked-pd-today-extreme {
+    color: #ffffff !important;
+}
+canvas{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.hc-selec-device{
+    background:transparent;
+    color:black;
+    border: none;
+}
+
+.hc-grow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.2s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.hc-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+/*----------planytilla devices--------- */
+.hc-box-devices{
+    text-align: center;
+    background: black;
+    border-radius: 10px;
+    background: linear-gradient(to top right, #5f5858 , #000000 ) !important;
+    margin-bottom: 20px;
+    padding-bottom: 20px;    
+}
+
+.pull-right{
+    float: none !important;
+}
+
+/*----------planytilla profile--------- */
+.hc-box-profile{
+    text-align: center;
+    background: black;
+    border-radius: 10px;
+    background: linear-gradient(to top right, #5f5858 , #000000 ) !important;
+    margin-bottom: 20px;
+    padding-bottom: 20px;    
+}

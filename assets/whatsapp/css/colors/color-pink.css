@@ -1,0 +1,563 @@
+/*======================================================
+
+Project: WhatsChat - WhatsApp Chat Widget jQuery Plugin
+Author: Black Theme
+Released On: 10, Aug 2019
+@version: 1.0
+
+========================================================*/
+
+/*======================================================
+[Table of Contents For Pink Gradiant Color]
+* WhatsChat Main Layout CSS
+* WhatsChat Sidebar Togle CSS
+* DropDown List for WhatsChat Style10 Button CSS
+* WhatsChat Style1 CSS
+* WhatsChat Style2 CSS
+* WhatsChat Style3 CSS
+* WhatsChat Style4 CSS
+* WhatsChat Style5 CSS
+* WhatsChat Style6 CSS
+* WhatsChat Style7 CSS
+* WhatsChat Style8 CSS
+* WhatsChat Style9 CSS
+* WhatsChat Style10 CSS
+========================================================*/ 
+
+/*==================================================
+    WhatsChat Main Layout CSS
+====================================================*/
+.layout .layout-features i{
+    color: #ce002f;
+}
+.layout .layout-funcation .layout-funcation-odd{
+    background: #eee;
+}
+
+/* Common CSS */
+.layout .title,
+.layout .wrapper .div-dot:after{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.layout .layout-heading h2,
+.layout .layout-heading p{
+    color: #fff;
+}
+.layout .layout-style-title h3,
+.layout .layout-button-title h3,
+.layout .layout-features-title h3,
+.layout .layout-funcation-title h3,
+.layout .layout-features h4,
+.layout .layout-funcation h4{
+    color: #555;
+}
+.layout .layout-style-title p,
+.layout .layout-button-title p,
+.layout .layout-features-title p,
+.layout .layout-funcation-title p,
+.layout .layout-features p,
+.layout .layout-funcation p{
+    color: #8c8c8c;
+}
+
+/*==================================================
+    WhatsChat Sidebar Togle CSS (Left Slide Panel)
+====================================================*/
+.wc-header{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+
+/* Common CSS */
+.wc-setting .icon,
+.wc-setting .link li a{
+    color: #555;
+}
+.wc-setting .icon i,
+.wc-setting .link li a:hover{
+    color: #ce002f;
+}
+
+/*==================================================
+    DropDown List for WhatsChat Style10 Button CSS
+====================================================*/
+.wc-dropdown .new-select{
+    color: #444;
+}
+.wc-dropdown .new-select .selection{
+    border: 1px solid #ce002f;
+}
+.wc-dropdown .new-select .selection:hover p, 
+.wc-dropdown .new-select .selection.open p{
+    color: #383838;
+}
+.wc-dropdown .new-select .selection > span{
+    border-color: #ce002f transparent transparent transparent;
+}
+.wc-dropdown .new-select .selection.open > span{
+    border-color: transparent transparent #bbb transparent;
+}
+.wc-dropdown .new-option.reveal:hover{
+    color: #f5f5f5;
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);    
+}
+
+/* Common CSS */
+.wc-dropdown .new-select .selection,
+.wc-dropdown .new-option{
+    background-color: #fff;
+}
+
+/*==================================================
+    Start WhatsChat Style1 CSS
+====================================================*/
+.wc-style1 .wc-panel{
+    background-color: #fff;
+}
+.wc-style1 .wc-body .wc-list li{
+    background-color: #eee;
+}
+.wc-style1 .wc-body .wc-list li:hover{
+    background-color: #e6e6e6;
+}
+.wc-style1 .wc-list .wc-user-img{
+    border: 1.5px solid #f5f6fa;
+}
+.wc-style1 .wc-list .wc-status-icon{
+    border: 1.5px solid #fff;
+}
+.wc-style1 .wc-list .wc-offline{
+    background-color: #b1b1b1;
+}
+.wc-style1 .wc-list .wc-user-info span{
+    color: #383838;
+}
+.wc-style1 .wc-list .wc-user-info p{
+    color: #8c8c8c;
+}
+.wc-style1 .wc-list .wc-chat-icon i{
+    color: #ce002f;
+}
+
+/* Common CSS */
+.wc-style1 .wc-panel .wc-header,
+.wc-style1 .wc-body .wc-list .wc-online,
+.wc-style1 .wc-button{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style1 .wc-panel .wc-header,
+.wc-style1 .wc-button i{
+    color: #fff;
+}
+/*==================================================
+    End WhatsChat Style1 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style2 CSS
+====================================================*/
+.wc-style2 .wc-panel .wc-button{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style2 .wc-panel .wc-list{
+    border: 2px solid #ce002f;
+}
+.wc-style2 .wc-panel .wc-list img{
+    background: #fff;
+}
+
+/* Common CSS */
+.wc-style2 .wc-panel .wc-button,
+.wc-style2 .wc-panel .wc-button:hover{
+    color: #fff;
+}
+/*==================================================
+    End WhatsChat Style2 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style3 CSS
+====================================================*/
+.wc-style3 .wc-button i{
+    color: #ce002f;
+}
+.wc-style3 .wc-list .d-flex{
+    background-color: #f5f5f5;
+}
+.wc-style3 .wc-list:hover .d-flex{
+    background-color: #eee;
+    border-left: 2px solid #ce002f; 
+}
+.wc-style3 .wc-list .wc-offline{
+    background-color: #b1b1b1;
+}
+.wc-style3 .wc-list .wc-user-info span{
+    color: #383838;
+}
+.wc-style3 .wc-list .wc-user-info p{
+    color: #8c8c8c;
+}
+
+/* Common CSS */
+.wc-style3 .wc-header,
+.wc-style3 .wc-body .wc-list .wc-online{
+    color: #fff;
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style3,
+.wc-style3 .wc-button{
+    background-color: #fff; 
+}
+/*==================================================
+    End WhatsChat Style3 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style4 CSS
+====================================================*/
+.wc-style4 .wc-overlay{
+    background-color: #0000007a;
+}
+.wc-style4 .wc-modal .wc-content{
+    background-color: #fff;
+}
+.wc-style4 .wc-contacts .wc-list{
+    color: #383838;
+}
+.wc-style4 .wc-list li{
+    background-color: #f5f7f9;
+}
+.wc-style4 .wc-list .wc-user-img{
+    border: 2px solid transparent;
+}
+.wc-style4 .wc-list:hover .wc-user-img{
+    border: 2px solid #ce002f;
+}
+.wc-style4 .wc-user-info strong{
+    color: #383838;
+}
+.wc-style4 .wc-user-info .wc-status{
+    border: 1px solid #fff;
+}
+.wc-style4 .wc-user-info p{
+    color: #8c8c8c;
+}
+.wc-style4 .wc-list .wc-chat-icon i{
+    color: #ce002f;
+}
+
+/* Common CSS */
+.wc-style4 .wc-button,
+.wc-style4 .wc-button:hover,
+.wc-style4 .wc-user-info .wc-status,
+.wc-style4 .wc-footer .wc-close{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f); 
+}
+.wc-style4 .wc-button:hover,
+.wc-style4 .wc-header,
+.wc-style4 .wc-button i,
+.wc-style4 .wc-user-info .wc-status,
+.wc-style4 .wc-footer .wc-close{
+    color: #fff;
+}
+/*==================================================
+    End WhatsChat Style4 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style5 CSS
+====================================================*/
+.wc-style5 .wc-list .wc-online{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style5 .wc-list .wc-offline{
+    background-color: #b1b1b1;
+}
+.wc-style5 .wc-list .wc-user-img{
+    border: 2px solid #ce002f;
+}
+.wc-style5 .wc-list:hover strong{
+    color: #383838;
+}
+.wc-style5 .wc-list:hover .wc-user-info p{
+    color: #8c8c8c;
+}
+
+/* Common CSS */
+.wc-style5 .wc-list .wc-user-img,
+.wc-style5 .wc-list:hover .wc-user-info{
+    background: #fff;
+}
+/*==================================================
+    End WhatsChat Style5 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style6 CSS
+====================================================*/
+.wc-style6 .wc-panel{
+    background-color: #fff;
+}
+.wc-style6 .wc-user-info span{
+    color: #383838;
+}
+.wc-style6 .wc-user-info p{
+    color: #8c8c8c;
+}
+.wc-style6 .wc-list .wc-online{
+    box-shadow: 0 0 14px #69f9b0;
+    border: 2px solid #ce002f;
+}
+.wc-style6 .wc-list .wc-offline{
+    box-shadow: 0 0 10px #b1b1b1;
+    border: 2px solid #b1b1b1;
+}
+
+/* Common CSS */
+.wc-style6 .wc-header,
+.wc-style6 .wc-button{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style6 .wc-panel .wc-header,
+.wc-style6 .wc-button i{
+    color: #fff;
+}
+/*==================================================
+    End WhatsChat Style6 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style7 CSS
+====================================================*/
+.wc-style7 .wc-content .wc-bubble span{
+    color: rgba(0,0,0,0.4);
+}
+
+/* Common CSS */
+.wc-style7 .wc-header,
+.wc-style7 .wc-button,
+.wc-style7 .wc-footer .wc-list{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style7 .wc-panel,
+.wc-style7 .wc-content .wc-bubble,
+.wc-style7 .wc-footer{
+    background-color: #fff;
+}
+.wc-style7 .wc-panel .wc-header,
+.wc-style7 .wc-button i,
+.wc-style7 .wc-user-info,
+.wc-style7 .wc-list p,
+.wc-style7 .wc-list i{
+    color: #fff;
+}
+/*==================================================
+    End WhatsChat Style7 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style8 CSS
+====================================================*/
+.wc-style8 .wc-list .wc-user-img{
+    border: 2px solid #ce002f;
+}
+
+/* Common CSS */
+.wc-style8 .wc-panel .wc-button i,
+.wc-style8 .wc-panel ul .wc-list{
+    color: #fff;
+}
+.wc-style8 .wc-panel .wc-button,
+.wc-style8 .wc-list .wc-user-img,
+.wc-style8 .wc-list .wc-user-info{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/*==================================================
+    End WhatsChat Style8 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style9 CSS
+====================================================*/
+.wc-style9 .wc-button i{
+    color: #fff;
+}
+
+/* Common CSS */
+.wc-style9:after,
+.wc-style9 .wc-button{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/*==================================================
+    End WhatsChat Style9 CSS
+====================================================*/
+
+/*==================================================
+    Start WhatsChat Style10 CSS
+====================================================*/
+/* Start WhatsChat Button Style 1 */
+.wc-style10 .wc-button1 span{
+    color: #fff;
+}
+.wc-style10 .wc-button1 .social-link:hover{
+    border: 2px solid #fff;
+}
+.wc-style10 .wc-button1,
+.wc-style10 .wc-button1:before,
+.wc-style10 .wc-button1:after,
+.wc-style10 .wc-button1:hover{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/* End WhatsChat Button Style 1 */
+
+/* Start WhatsChat Button Style 2 */
+.wc-style10 .wc-button2 .wc-chat-icon i{
+    border: 2px solid #fff;
+}
+.wc-style10 .wc-button2 .wc-chat-icon i,
+.wc-style10 .wc-button2 p{
+    color: #fff;    
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/* End WhatsChat Button Style 2 */
+
+/* Start WhatsChat Button Style 3 */
+.wc-style10 .wc-button3{
+    border: 2px solid #fff;    
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+.wc-style10 .wc-button3 i,
+.wc-style10 .wc-button3 span{
+    color: #fff;
+}
+/* End WhatsChat Button Style 3 */
+
+/* Start WhatsChat Button Style 4 */
+.wc-style10 .wc-button4:hover{
+    background: #fff;
+}
+.wc-style10 .wc-button4:hover span{
+    color: #ce002f;
+}
+.wc-style10 .wc-button4 span,
+.wc-style10 .wc-button4 .fa-whatsapp{
+    color: #fff;
+}
+.wc-style10 .wc-button4,
+.wc-style10 .wc-button4 .fa-whatsapp{
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/* End WhatsChat Button Style 4 */
+
+/* Start WhatsChat Button Style 5 */
+.wc-style10 .wc-button5 i{
+    border: 2px solid #fff;
+}
+.wc-style10 .wc-button5 i,
+.wc-style10 .wc-button5 .fa-whatsapp{
+    color: #fff;    
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/* End WhatsChat Button Style 5 */
+
+/* Start WhatsChat Button Style 6 */
+.wc-style10 .wc-button6 i{
+    color: #fff;    
+    border: 2px solid #fff;
+    background: -webkit-linear-gradient(to right, #ff729b, #ce002f);
+    background: -moz-linear-gradient(to right, #ff729b, #ce002f);
+    background: -ms-linear-gradient(to right, #ff729b, #ce002f);
+    background: -o-linear-gradient(to right, #ff729b, #ce002f);
+    background: linear-gradient(to right, #ff729b, #ce002f);
+}
+/* End WhatsChat Button Style 6 */
+
+/* Start WhatsChat Button Style 7 */
+.wc-style10 .wc-button7 a{
+    background: #ce002f;
+}
+.wc-style10 .wc-button7:hover a{
+    background: transparent;
+}
+.wc-style10 .wc-button7 a img{
+    border: 2px solid #ce002f;
+}
+.wc-style10 .wc-button7:before, 
+.wc-style10 .wc-button7:after {
+    background: #fff;
+}
+.wc-style10 .wc-button7:hover:before, 
+.wc-style10 .wc-button7:hover:after {
+    background: transparent;
+}
+/* End WhatsChat Button Style 7 */
+/*==================================================
+    Start WhatsChat Style10 CSS
+====================================================*/

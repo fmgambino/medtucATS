@@ -1,0 +1,19 @@
+<<<<<<< HEAD
+# Writing all output to: D:\12 - PROYECTOS\2 - PROTEUS\2 - ELECTRONICA GAMBINO\5 - ANTIDERRAME2022\hardware\antiderrame-v01-conMascara.log
+=======
+# Writing all output to: D:\ELECTR??NICA GAMBINO\01 CLIENTES\85 ARIEL VERA\antiDerrame\hardware\antiderrame-v01-conMascara.log
+>>>>>>> a8c01b1ee904951e7817ac582aacb28d4dbd2a18
+set pad_wire_necking on
+bus diagonal
+fanout 5
+route 50
+clean 2
+route 50 16
+clean 2
+filter 5
+recorner diagonal
+<<<<<<< HEAD
+status_file
+
+=======
+>>>>>>> a8c01b1ee904951e7817ac582aacb28d4dbd2a18
